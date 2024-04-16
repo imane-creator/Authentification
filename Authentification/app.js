@@ -45,11 +45,11 @@ app.post('/register', async (req, res) => {
       }
 
       if (results.length > 0) {
-        res.status(400).send("Email already exists");
+        res.status(400).send("Wrong email or password");
       } else {
         
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log(bcrypt.hash(password, 10));
+        
 
         const insertUserQuery = `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`;
         db.query(insertUserQuery, [name, email, hashedPassword], (error, results) => {

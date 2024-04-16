@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -19,13 +21,17 @@ export default function Signup() {
       body: JSON.stringify(values),
       headers: { 'Content-Type': 'application/json' }
     })
-      .then((res) => console.log(values))
+    .then((res) => res.text()) // Convertir la réponse en texte
+    .then((data) => {
+      alert(data);
+      console.log(values);
+    })
       .catch((err) => console.log(err));
   };
 
   return (
-    <div className='d-flex w-100 vh-100 bg-primary justify-content-center align-items-center'>
-      <div className="bg-white p-3 rounded w-25">
+    <div className='d-flex w-100 vh-100 bg-black justify-content-center align-items-center'>
+      <div className="bg-white p-3 rounded w-50">
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -40,9 +46,10 @@ export default function Signup() {
             <label htmlFor="password"><strong>Mot de passe</strong></label>
             <input type="password" placeholder="Entrez votre mot de passe" name="password" className="form-control rounded-0" onChange={handleChange} />
           </div>
-          <button type="submit" className="btn btn-success w-100 rounded-8">S'inscrire</button>
+          <button type="submit" href="/signup"  className="btn btn-success w-100 rounded-8">S'inscrire</button>
+
           <p>Vous acceptez nos termes et conditions</p>
-          <a href="/" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none" />
+          <a href="/login" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none" />
         </form>
       </div>
     </div>
